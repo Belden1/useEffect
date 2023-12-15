@@ -3,7 +3,24 @@ import './App.css';
 import Counter from './Counter';
 
 function App() {
-	const [count, setCount] = useState(0);
+	const [data, setData] = useState([]);
+	// Do this
+	useEffect(() => {
+		const fetchData = async () => {
+			const data = await fetch('https://jsonplaceholder.typicode.com/todos');
+			const jsonData = await data.json();
+			console.log(jsonData);
+			setData(jsonData);
+		};
+
+		fetchData();
+	}, []);
+	// Dont do this
+	// useEffect(async () => {
+	// 	const data = await fetch('https://jsonplaceholder.typicode.com/todos');
+	// 	const jsonData = await data.json();
+	// 	console.log(jsonData);
+	// });
 
 	return (
 		<>
